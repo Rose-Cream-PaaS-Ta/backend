@@ -2,6 +2,7 @@ import * as Joi from '@hapi/joi';
 import { Injectable } from '@nestjs/common';
 import { parse } from 'dotenv';
 import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { fileExistsSync } from 'tsconfig-paths/lib/filesystem';
 
 type config = Record<string, string>;
@@ -43,3 +44,5 @@ export class ConfigService {
     return validatedEnvConfig;
   }
 }
+
+export const config = new ConfigService(resolve(process.cwd(), '.env'));
