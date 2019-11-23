@@ -2,6 +2,7 @@ import * as Joi from '@hapi/joi';
 import { Injectable } from '@nestjs/common';
 import { parse } from 'dotenv';
 import { readFileSync } from 'fs';
+import { fileExistsSync } from 'tsconfig-paths/lib/filesystem';
 
 type config = Record<string, string>;
 
@@ -11,7 +12,7 @@ export class ConfigService {
 
   constructor(path?: string) {
     this.env = ConfigService.validateInput({
-      ...path && parse(readFileSync(path)),
+      ...path && fileExistsSync(path) && parse(readFileSync(path)),
       ...process.env,
     });
   }
