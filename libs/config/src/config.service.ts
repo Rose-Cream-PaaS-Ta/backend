@@ -11,10 +11,11 @@ type config = Record<string, string>;
 export class ConfigService {
   private readonly env: config;
 
-  constructor(path?: string) {
+  constructor(path?: string, conf?: config) {
     this.env = ConfigService.validateInput({
       ...path && fileExistsSync(path) && parse(readFileSync(path)),
       ...process.env,
+      ...conf,
     });
   }
 
@@ -30,9 +31,14 @@ export class ConfigService {
     return this.env.PORT;
   }
 
+  public get MONGODB_URI(): string {
+    return this.env.MONGODB_URI;
+  }
+
   private static validateInput(envConfig: config): config {
     const environmentVariablesScheme: Joi.ObjectSchema = Joi.object({
       HOST: Joi.string().hostname().default('0.0.0.0'),
+      MONGODB_URI: Joi.string().regex(/^mongodb:\/\/.+\/[a-z-]+$/).required(),
       NODE_ENV: Joi.string().valid('development', 'production', 'test', 'provision').default('development'),
       PORT: Joi.number().default(3000),
     }).unknown(true);

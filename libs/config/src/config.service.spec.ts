@@ -22,6 +22,14 @@ describe('ConfigService', () => {
     expect(service).toBeDefined();
   });
 
+  it('should throw Error when config doesn\'t matches to scheme', () => {
+    expect(() => {
+      return new ConfigService(null, {
+        MONGODB_URI: null,
+      }).MONGODB_URI;
+    }).toThrow();
+  });
+
   it('should be get config', () => {
     expect(service.HOST).toStrictEqual(process.env.HOST || '0.0.0.0');
     expect(service.NODE_ENV).toStrictEqual(process.env.NODE_ENV || 'development');
