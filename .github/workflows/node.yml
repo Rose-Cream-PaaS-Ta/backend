@@ -32,3 +32,9 @@ jobs:
         run: yarn test
         env:
           MONGODB_URI: mongodb://localhost:27017/test
+      - name: Send Coverage Data to Coveralls.io
+        run: yarn test:coveralls
+        env:
+          MONGODB_URI: mongodb://localhost:27017/test
+          COVERALLS_SERVICE_NAME: GitHub Actions
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
