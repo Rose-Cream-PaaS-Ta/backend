@@ -3,7 +3,8 @@ name: Test
 on: [push]
 
 jobs:
-  build:
+  test:
+    name: Run Test
     services:
       mongodb:
         image: mongo
