@@ -1,1 +1,1 @@
-# Rose Cream PaaS-Ta B.E.
+# Rose Cream PaaS-Ta B.E. [![Coverage Status](https://coveralls.io/repos/github/Rose-Cream-PasS-Ta/backend/badge.svg?branch=master)](https://coveralls.io/github/Rose-Cream-PasS-Ta/backend?branch=master) [![Actions Node CI/CD Status](https://github.com/Rose-Cream-PasS-Ta/backend/workflows/Node.js%20CI%2FCD/badge.svg)](https://github.com/Rose-Cream-PasS-Ta/backend/actions?query=workflow%3A%22Node.js+CI%2FCD%22)
