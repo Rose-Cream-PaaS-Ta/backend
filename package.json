@@ -87,5 +87,8 @@
       "@app/message/(.*)": "<rootDir>/libs/message/src/$1",
       "@app/message": "<rootDir>/libs/message/src"
     }
+  },
+  "engines": {
+    "node": ">=10.x"
   }
 }

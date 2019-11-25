@@ -49,4 +49,4 @@ jobs:
           cf_org: ${{ secrets.CF_ORG }}
           cf_username: ${{ secrets.CF_USERNAME }}
           cf_password: ${{ secrets.CF_PASSWORD }}
-          command: push
+          command: push rose-cream-pasta
