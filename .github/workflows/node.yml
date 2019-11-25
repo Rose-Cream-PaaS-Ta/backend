@@ -43,3 +43,11 @@ jobs:
         env:
           COVERALLS_SERVICE_NAME: GitHub Actions
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      - uses: Rose-Cream-PasS-Ta/cf-cli-action@master
+        with:
+          cf_api: ${{ secrets.CF_ENDPOINT }}
+          cf_org: ${{ secrets.CF_ORG }}
+          cf_username: ${{ secrets.CF_USERNAME }}
+          cf_password: ${{ secrets.CF_PASSWORD }}
+          command: push rose-cream-pasta -c "yarn install && yarn build && yarn start:prod"
+          cf_docker_password: ${{ secrets.GITHUB_TOKEN }}
