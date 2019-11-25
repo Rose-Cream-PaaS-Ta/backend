@@ -32,6 +32,11 @@ jobs:
         run: yarn test
         env:
           MONGODB_URI: mongodb://localhost:27017/test
+          NCP_KEY: ${{ secrets.NCP_KEY }}
+          NCP_SECRET: ${{ secrets.NCP_SECRET }}
+          NCP_SMS_ID: ${{ secrets.NCP_SMS_ID }}
+          NCP_SMS_SECRET: ${{ secrets.NCP_SMS_SECRET }}
+          NCP_SMS_SENDER: ${{ secrets.NCP_SMS_SENDER }}
       - name: Send Coverage Data to Coveralls.io
         run: yarn test:coveralls
         env:
