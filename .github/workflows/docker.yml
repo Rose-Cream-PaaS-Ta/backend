@@ -17,7 +17,7 @@ jobs:
         run: docker build -t $IMAGE .
       - name: Push
         run: docker push $IMAGE
-      - uses: citizen-of-planet-earth/cf-cli-action@master
+      - uses: Rose-Cream-PasS-Ta/cf-cli-action@master
         with:
           cf_api: ${{ secrets.CF_ENDPOINT }}
           cf_username: ${{ secrets.CF_USERNAME }}
