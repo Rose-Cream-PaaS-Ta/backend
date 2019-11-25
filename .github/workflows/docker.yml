@@ -17,9 +17,10 @@ jobs:
         run: docker build -t $IMAGE .
       - name: Push
         run: docker push $IMAGE
-      - name: Log in to CF
-        run: cf login --skip-ssl-validation -a ${{ secrets.CF_ENDPOINT }} -u ${{ secrets.CF_USERNAME }} -p ${{ secrets.CF_PASSWORD }}
-      - name: Deploy
-        run: cf push rose-cream-pasta --docker-image $IMAGE --docker-username ${{ secrets.GITHUB_USER }}
-        env:
-          CF_DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      - uses: citizen-of-planet-earth/cf-cli-action@master
+        with:
+          cf_api: ${{ secrets.CF_ENDPOINT }}
+          cf_username: ${{ secrets.CF_USERNAME }}
+          cf_password: ${{ secrets.CF_PASSWORD }}
+          command: push rose-cream-pasta --docker-image $IMAGE --docker-username ${{ secrets.GITHUB_USER }}
+          cf_docker_password: ${{ secrets.GITHUB_TOKEN }}
