@@ -17,6 +17,9 @@ export class ConfigService {
       ...path && fileExistsSync(path) && parse(readFileSync(path)),
       ...process.env,
       ...conf,
+      ...process.env.VCAP_SERVICES && {
+        MONGODB_URI: JSON.parse(process.env.VCAP_SERVICES)['Mongo-DB'][0].credentials.uri,
+      },
     });
   }
 

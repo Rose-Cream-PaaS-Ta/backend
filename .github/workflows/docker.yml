@@ -1,0 +1,19 @@
+name: Docker CI/CD
+
+on: [push]
+
+env:
+  IMAGE: docker.pkg.github.com/rose-cream-pass-ta/backend/rose-cream-pass-ta
+
+jobs:
+  build-and-push:
+    name: Build image and Push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Log in to Repositry
+        run: docker login docker.pkg.github.com --username ${{ secrets.GITHUB_USER }} --password ${{ secrets.GITHUB_TOKEN }}
+      - name: build
+        run: docker build -t $IMAGE .
+      - name: Push
+        run: docker push $IMAGE
