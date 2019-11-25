@@ -20,6 +20,7 @@ jobs:
       - uses: Rose-Cream-PasS-Ta/cf-cli-action@master
         with:
           cf_api: ${{ secrets.CF_ENDPOINT }}
+          cf_org: ${{ secrets.CF_ORG }}
           cf_username: ${{ secrets.CF_USERNAME }}
           cf_password: ${{ secrets.CF_PASSWORD }}
           command: push rose-cream-pasta --docker-image $IMAGE --docker-username ${{ secrets.GITHUB_USER }}
