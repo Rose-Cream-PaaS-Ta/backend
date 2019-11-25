@@ -34,5 +34,10 @@ describe('ConfigService', () => {
     expect(service.HOST).toStrictEqual(process.env.HOST || '0.0.0.0');
     expect(service.NODE_ENV).toStrictEqual(process.env.NODE_ENV || 'development');
     expect(service.PORT).toStrictEqual(parseInt(process.env.PORT, 10) || 3000);
+    expect((() => {
+      const ncp = service.NCP_AUTH;
+      console.log(JSON.stringify(ncp, null, 4));
+      return ncp;
+    })()).toBeTruthy();
   });
 });

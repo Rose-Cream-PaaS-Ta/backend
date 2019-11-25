@@ -19,6 +19,9 @@
       ],
       "@app/user": [
         "libs/user/src"
+      ],
+      "@app/message": [
+        "libs/message/src"
       ]
     }
   },
