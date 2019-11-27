@@ -1,5 +1,8 @@
 modules:
   - name: rose-cream-pasta
+    instances: 4
+    memory: 768MB
+    disk_quota: 1GB
     type: nodejs
     path: .
     command: yarn start:prod
