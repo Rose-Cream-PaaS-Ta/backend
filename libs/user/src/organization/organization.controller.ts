@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiUseTags } from '@nestjs/swagger';
+import { Organization } from './classes/organization.class';
 import { OrganizationService } from './organization.service';
 
 @ApiUseTags('Organization')
@@ -9,7 +10,7 @@ export class OrganizationController {
   }
 
   @Get()
-  public root() {
+  public root(): Promise<Organization[]> {
     return this.organizationService.getOrganization({});
   }
 }
