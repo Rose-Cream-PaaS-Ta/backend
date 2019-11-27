@@ -3,8 +3,8 @@ modules:
     type: nodejs
     path: .
     command: yarn start:prod
-    build-parameters:
-      builder: custom
-      commands:
-        - yarn install --production=false
-        - yarn build
+    stack: cflinuxfs3
+    buildpacks:
+      - https://github.com/cloudfoundry/nodejs-buildpack
+    services:
+      - RoseCreamDatabase

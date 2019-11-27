@@ -43,6 +43,8 @@ jobs:
         env:
           COVERALLS_SERVICE_NAME: GitHub Actions
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      - name: Build
+        run: yarn build
       - uses: Rose-Cream-PasS-Ta/cf-cli-action@master
         with:
           cf_api: ${{ secrets.CF_ENDPOINT }}

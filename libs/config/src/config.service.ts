@@ -18,7 +18,11 @@ export class ConfigService {
       ...process.env,
       ...conf,
       ...process.env.VCAP_SERVICES && {
-        MONGODB_URI: JSON.parse(process.env.VCAP_SERVICES)['Mongo-DB'][0].credentials.uri,
+        MONGODB_URI: (() => {
+          const vcapServices = JSON.parse(process.env.VCAP_SERVICES);
+          console.log(JSON.stringify(vcapServices, null, 4));
+          return vcapServices;
+        })()['Mongo-DB'][0].credentials.uri,
       },
     });
   }
@@ -72,7 +76,7 @@ export class ConfigService {
   private static validateInput(envConfig: config): config {
     const environmentVariablesScheme: Joi.ObjectSchema = Joi.object({
       HOST: Joi.string().hostname().default('0.0.0.0'),
-      MONGODB_URI: Joi.string().regex(/^mongodb:\/\/.+\/[a-z-]+$/).required(),
+      MONGODB_URI: Joi.string().regex(/^mongodb:\/\//).required(),
       NCP_KEY: Joi.string().required(),
       NCP_SECRET: Joi.string().required(),
       NCP_SMS_ID: Joi.string().required(),
