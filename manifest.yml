@@ -11,3 +11,4 @@ modules:
       - https://github.com/cloudfoundry/nodejs-buildpack
     services:
       - RoseCreamDatabase
+      - RoseCreamRedis
