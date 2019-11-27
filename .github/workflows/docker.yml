@@ -3,7 +3,7 @@ name: Docker CI/CD
 on: [push]
 
 env:
-  IMAGE: docker.pkg.github.com/rose-cream-pass-ta/backend/rose-cream-pass-ta
+  IMAGE: docker.pkg.github.com/rose-cream-paas-ta/backend/rose-cream-pass-ta
 
 jobs:
   build-and-push:
