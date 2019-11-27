@@ -18,11 +18,7 @@ export class ConfigService {
       ...process.env,
       ...conf,
       ...process.env.VCAP_SERVICES && {
-        MONGODB_URI: (() => {
-          const vcapServices = JSON.parse(process.env.VCAP_SERVICES);
-          console.log(JSON.stringify(vcapServices, null, 4));
-          return vcapServices;
-        })()['Mongo-DB'][0].credentials.uri,
+        MONGODB_URI: JSON.parse(process.env.VCAP_SERVICES)['Mongo-DB'][0].credentials.uri,
       },
     });
   }
