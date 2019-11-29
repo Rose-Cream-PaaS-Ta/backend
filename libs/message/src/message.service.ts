@@ -28,16 +28,16 @@ export class MessageService {
     this.config = config.NCP_AUTH;
   }
 
-  public signature(method: Method, url: string, timestamp: number): string {
+  public signature(method: Method, url: string, timestamp: Date): string {
     const accessKey = this.config.NCP_KEY;			// access key id (from portal or Sub Account)
     const secretKey = this.config.NCP_SECRET;			// secret key (from portal or Sub Account)
 
-    return CryptoJS.HmacSHA256(`${method} ${url}\n${timestamp}\n${accessKey}`, secretKey).toString(CryptoJS.enc.Base64);
+    return CryptoJS.HmacSHA256(`${method} ${url}\n${timestamp.getDate()}\n${accessKey}`, secretKey).toString(CryptoJS.enc.Base64);
   }
 
   public async send(to: number | string, text: string) {
     const endpoint = `/sms/v2/services/${escape(this.config.NCP_SMS_ID)}/messages`;
-    const timestamp = new Date().getTime();
+    const timestamp = new Date();
     const sender: string = this.config.NCP_SMS_SENDER;
     return this.httpService.post<IMessageResult>(endpoint, await validateOrReject(new MessageRequestModel({
       content: text,
@@ -50,9 +50,13 @@ export class MessageService {
     })), {
       baseURL: 'https://sens.apigw.ntruss.com',
       headers: {
+        'Content-Type': 'application/json',
         'x-ncp-apigw-signature-v2': this.signature(Method.post, endpoint, timestamp),
-        'x-ncp-apigw-timestamp': timestamp.toString(),
+        'x-ncp-apigw-timestamp': timestamp.getTime().toString(),
         'x-ncp-iam-access-key': this.config.NCP_KEY,
+      },
+      validateStatus() {
+        return true;
       },
     }).toPromise();
   }

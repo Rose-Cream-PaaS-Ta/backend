@@ -25,7 +25,11 @@ describe('MessageService', () => {
 
   if (!process.env.GITHUB_ACTIONS) {
     it('should send message', async () => {
-      await expect(service.send('01030256290', `This is Test Message sent at ${new Date().toDateString()}`)).resolves.toBeTruthy();
+      await expect(service.send('01030256290', `This is Test Message sent at ${new Date().toDateString()}`).then((result) => {
+        console.log(JSON.stringify(result.data), null, 4);
+      }).catch((e) => {
+        console.log(JSON.stringify(e, null, 4));
+      })).resolves.toBeTruthy();
     });
   }
 });
